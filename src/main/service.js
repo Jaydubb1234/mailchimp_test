@@ -23,17 +23,6 @@ function lineToHtml(lines, i) {
         const res = createPTag(lines, i);
         html += res.html;
         i = res.i;
-    //     let pLines = '';
-    //     pLines += `<p>${line}`;
-
-    //     while (lines[i+1] && lines[i+1] !== '' && lines[i+1] !== '#') {
-    //         pLines += `\n${lines[i+1]}`;
-    //         i++;
-    //     }
-
-    //     pLines += `</p>\n`;
-    //     pLines = textToATag(pLines, 0);
-    //     html += `${pLines}`;
     }
 
     return {html, i};
@@ -84,16 +73,18 @@ function textToATag(text, i) {
 function createHTag(line) {
     let html = '';
     let tagCount = 1;
+
     while (line.charAt(tagCount) === '#') tagCount++;
 
     let currentTxt = textToATag(line.slice(tagCount+1),tagCount+1);
     html += `<h${tagCount}>${currentTxt}</h${tagCount}>\n`;
+
     return html;
 }
 
 function createPTag(lines, i){
     let pLines = '';
-    //let html = '';
+
     pLines += `<p>${lines[i]}`;
 
     while (lines[i+1] && lines[i+1] !== '' && lines[i+1] !== '#') {
@@ -105,6 +96,4 @@ function createPTag(lines, i){
     pLines = textToATag(pLines, 0);
 
     return {html:`${pLines}`, i};
-
-    //return html
 }
